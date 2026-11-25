@@ -29,8 +29,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Budget vs total
     if ($budget === '' || !is_numeric($budget)) {
         $errors['budget'] = 'Please enter your budget.';
-    } elseif ($qty <= $p['stock'] && (float)$budget < $p['price'] * $qty) {
-        // only computed when the quantity is valid, so a stock error alone never triggers it
+    } elseif ((float)$budget < $p['price'] * $qty) {
+        // always computed (price x quantity), even if the stock error is also showing
         $errors['budget'] = 'Budget insufficient';
     }
 
